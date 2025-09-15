@@ -115,7 +115,7 @@
 //            // Обчислення очікуваної частоти для експоненційного розподілу
 //            double expectedProb = Math.exp(-lambda * left) - Math.exp(-lambda * right);
 //            double expected = expectedProb * SAMPLE_SIZE;
-//
+//2
 //            if (expected >= 5) { // Умова застосовності тесту хі-квадрат
 //                double observed = histogram.frequencies[i];
 //                double contribution = Math.pow(observed - expected, 2) / expected;

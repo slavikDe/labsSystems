@@ -66,5 +66,15 @@ public class Histogram {
 
     public int[] getFrequencies() {return this.frequencies;}
 
+    public int getFreedomDegree() {
+        return frequencies.length - 1; // bins - m - 1, тут m=0
+    }
 
+    public double[] getBinEdges() {
+        double[] edges = new double[frequencies.length + 1];
+        for (int i = 0; i <= frequencies.length; i++) {
+            edges[i] = min + i * binWidth;
+        }
+        return edges;
+    }
 }
