@@ -22,22 +22,19 @@ public class Histogram {
 
     public void drawHistogram() {
         System.out.println("ГІСТОГРАМА ЧАСТОТ:");
-        System.out.println("Інтервал\t\tЧастота\t\tВізуалізація");
-        System.out.println("-".repeat(60));
+        int maxFreq = Arrays.stream(frequencies).max().orElse(1);
+        int scale = Math.max(1, maxFreq / 50);
 
-        int maxFreq = Arrays.stream(this.frequencies).max().orElse(1);
-
-        for (int i = 0; i < this.frequencies.length; i++) {
+        for (int i = 0; i < frequencies.length; i++) {
             double left = this.min + i * this.binWidth;
             double right = left + this.binWidth;
-
-            int barLength = (int) (40.0 * this.frequencies[i] / maxFreq);
-            String bar = "*".repeat(barLength);
-
-            System.out.printf("[%.3f-%.3f)\t%d\t\t%s%n",
-                    left, right, this.frequencies[i], bar);
+            System.out.printf("Bin %2d [%.3f : %.3f]: \t",  i + 1, left, right);
+            int stars = frequencies[i] / scale;
+            for (int j = 0; j < stars; j++) {
+                System.out.print("*");
+            }
+            System.out.printf(" (%d)\n", frequencies[i]);
         }
-        System.out.println();
     }
 
     public static Histogram buildHistogram(List<Double> generatedSamples) {

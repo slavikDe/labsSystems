@@ -4,21 +4,25 @@ import org.example.utils.Histogram;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Normal implements NumberGenerator {
-    private List<Double> numbers;
-    private double sigma;
-    private double a;
+    private final double sigma;
+    private final double a;
 
-    Normal() {
+    private List<Double> numbers;
+
+    private final Random random;
+
+    Normal(double sigma, double a) {
         numbers = new ArrayList<>();
+        this.sigma = sigma;
+        this.a = a;
+        random = new Random();
     }
 
     @Override
-    public void generateSamples(int size, List<Double> params) {
-        this.sigma = params.get(0);
-        this.a = params.get(1);
-
+    public void generateSamples(int size) {
         for(int i = 0; i < size; i++){
             numbers.add(generate());
         }
@@ -27,10 +31,10 @@ public class Normal implements NumberGenerator {
     private double generate(){
         double sum = 0;
         for(int j = 0; j < 12; j++){
-            sum += Math.random();
+            sum += random.nextDouble();
         }
-        double u = sum - 6;
-        return sigma * u + a;
+        double mu = sum - 6;
+        return sigma * mu + a;
     }
 
     @Override

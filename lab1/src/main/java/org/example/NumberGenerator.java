@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface NumberGenerator {
 
-    void generateSamples(int size, List<Double> params);
+    void generateSamples(int size);
 
     void checkDistribution(Histogram histogram);
 

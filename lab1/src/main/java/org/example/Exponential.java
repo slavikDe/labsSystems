@@ -5,7 +5,6 @@ import org.example.utils.Histogram;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.math3.distribution.ChiSquaredDistribution;
 
 
 import static java.lang.Math.log;
@@ -16,11 +15,14 @@ public class Exponential implements NumberGenerator {
     private final double ALPHA = 0.05;
 
     private final List<Double> numbers = new ArrayList<>();
-    private double lambda;
+    private final double lambda;
+
+    Exponential(double lambda) {
+        this.lambda = lambda;
+    }
 
     @Override
-    public void generateSamples(int size, List<Double> params) {
-        lambda = params.getFirst();
+    public void generateSamples(int size) {
 
         for (int i = 0; i < size; i++) {
             double u;
@@ -52,9 +54,11 @@ public class Exponential implements NumberGenerator {
     }
 
     public double chi2CriticalValue(double alpha, int df) {
-        ChiSquaredDistribution chi2 = new ChiSquaredDistribution(df);
-        return chi2.inverseCumulativeProbability(1 - alpha);
+//        ChiSquaredDistribution chi2 = new ChiSquaredDistribution(df);
+//        return chi2.inverseCumulativeProbability(1 - alpha);
+        return 0.0;
     }
+
 
     private double calculateChi2(Histogram histogram) {
         double[] edges = histogram.getBinEdges();
