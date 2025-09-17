@@ -1,17 +1,20 @@
 package org.example;
 
-import com.sun.jdi.ClassNotLoadedException;
+import org.example.generators.Exponential;
+import org.example.generators.LCG;
+import org.example.generators.Normal;
+import org.example.generators.NumberGenerator;
 import org.example.utils.Histogram;
 import org.example.utils.Statistics;
 
-import java.util.List;
+import java.text.DecimalFormat;
 
 
 public class Main {
     static final int SAMPLE_SIZE = 1000;
 
     private static final double[] LAMBDA_VALUES = {0.5, 1, 1.5, 2.0};
-    private static final double[] A = {0, 5, -2}; // середнє значення (математичне очікування).
+    private static final double[] A = {1, 5, -2}; // середнє значення (математичне очікування).
     private static final double[] Q = {1, 2, 0.5}; // середньоквадратичне відхилення (стандартне відхилення).
 
 
@@ -19,9 +22,9 @@ public class Main {
         System.out.println("====================================\n");
         System.out.println("Testing exponential generator");
 
-//        for (double lambda : LAMBDA_VALUES) {
-//            testNumberGenerator(new Exponential(lambda));
-//        }
+        for (double lambda : LAMBDA_VALUES) {
+            testNumberGenerator(new Exponential(lambda));
+        }
 
         System.out.println("\n" + "=".repeat(50) + "\n");
         System.out.println("Testing normal generator");
@@ -32,7 +35,17 @@ public class Main {
             }
         }
         System.out.println("\n" + "=".repeat(50) + "\n");
-        System.out.println("Testing ... generator");
+        System.out.println("Testing LCG generator");
+
+        long[] lcgA = {1664525, 1103515245, 16807}; // multiplier values
+        long[] lcgC = {1013904223, 12345};       // increment values
+        long seed = 987654321;
+
+        for (long a : lcgA) {
+            for(long c : lcgC) {
+               testNumberGenerator(new LCG(a, c, seed));
+            }
+        }
 
     }
 
@@ -41,14 +54,12 @@ public class Main {
 
         generatorType.generateSamples(SAMPLE_SIZE);
 
-        double mean = Statistics.calculateMean(generatorType.getGeneratedSamples().stream().mapToDouble(x -> x).toArray());
-        double variance = Statistics.calculateVariance(generatorType.getGeneratedSamples().stream().mapToDouble(x -> x).toArray());
-        double std = Statistics.calculateStandardDeviation(generatorType.getGeneratedSamples().stream().mapToDouble(x -> x).toArray());
-        System.out.println(stats);
-
+        Statistics observedStats = Statistics.calculateStatistics(generatorType.getGeneratedSamples());
         Histogram hist = Histogram.buildHistogram(generatorType.getGeneratedSamples());
-        hist.drawHistogram();
+        observedStats.setHistogram(hist);
 
-        generatorType.checkDistribution(hist);
+        generatorType.printStatistic(observedStats);
+
+        generatorType.checkDistribution(observedStats);
     }
 }

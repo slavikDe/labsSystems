@@ -1,67 +1,53 @@
 package org.example.utils;
 
-import org.example.NumberGenerator;
-
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 import java.util.List;
 
-import static org.example.CompleteRandomAnalysis.StatisticalAnalyzer.calculateVariance;
-
+@Getter
+@Setter
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Statistics {
-//    final double mean;
-//    final double variance;
-//    final double stdDev;
+    final double mean;
+    final double variance;
+    final double stddev;
+    Histogram histogram;
 
-//    Statistics(double mean, double variance, double stdDev) {
-//        this.mean = mean;
-//        this.variance = variance;
-//        this.stdDev = stdDev;
-//    }
-//
-//    public static Statistics calculateStatistics(NumberGenerator generator) {
-//        List<Double> generatedSamples = generator.getGeneratedSamples();
-//        double[] sample = generatedSamples.stream().mapToDouble(Double::doubleValue).toArray();
-//        double mean = calculateMean(sample);
-//
-//
-//        double sum = generatedSamples.stream().reduce(0.0, Double::sum);
-//        double sumSquares = generatedSamples.stream().reduce(0.0, (val, accumulator) -> val * val + accumulator );
-//
-//        double mean = sum / generatedSamples.size();
-//        double variance = (sumSquares / generatedSamples.size()) - (mean * mean);
-//
-//        double stdDev = Math.sqrt(variance);
-//
-//        return new Statistics(mean, variance, stdDev);
-//    }
+    public Statistics(double mean, double variance, double stddev) {
+        this.mean = mean;
+        this.variance = variance;
+        this.stddev = stddev;
+    }
 
-//    @Override
-//    public String toString() {
-//        return String.format(
-//                "Statistics { mean = %.4f, variance = %.4f, stdDev = %.4f }",
-//                mean, variance, stdDev
-//        );
-//    }
-
-    public static double calculateMean(double[] sample) {
+    private static double calculateMean(List<Double> sample) {
         double sum = 0;
         for (double value : sample) {
             sum += value;
         }
-        return sum / sample.length;
+        return sum / sample.size();
     }
 
-    public static double calculateVariance(double[] sample) {
+    private static double calculateVariance(List<Double> sample) {
         double mean = calculateMean(sample);
         double sumSquaredDiff = 0;
-            for (double value : sample) {
+        for (double value : sample) {
             sumSquaredDiff += Math.pow(value - mean, 2);
         }
-            return sumSquaredDiff / (sample.length - 1);
+        return sumSquaredDiff / (sample.size() - 1);
     }
 
-    public static double calculateStandardDeviation(double[] sample) {
-    return Math.sqrt(calculateVariance(sample));
-}
+    private static double calculateStandardDeviation(List<Double> sample) {
+        return Math.sqrt(calculateVariance(sample));
+    }
 
+    public static Statistics calculateStatistics(List<Double> generatedSamples) {
+        double mean = calculateMean(generatedSamples);
+        double variance = calculateVariance(generatedSamples);
+        double stddev = calculateStandardDeviation(generatedSamples);
+
+        return new Statistics(mean, variance, stddev);
+    }
 
 }
