@@ -37,8 +37,9 @@ public class Main {
         System.out.println("\n" + "=".repeat(50) + "\n");
         System.out.println("Testing LCG generator");
 
-        long[] lcgA = {1664525, 1103515245, 16807}; // multiplier values
-        long[] lcgC = {1013904223, 12345};       // increment values
+        // Required parameters: a = 5^13, c = 2^31
+        long[] lcgA = {1220703125L, 1664525, 1103515245, 16807}; // a = 5^13 = 1220703125
+        long[] lcgC = {2147483648L, 1013904223, 12345};          // c = 2^31 = 2147483648
         long seed = 987654321;
 
         for (long a : lcgA) {

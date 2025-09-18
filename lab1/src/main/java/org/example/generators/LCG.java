@@ -35,7 +35,7 @@ public class LCG extends NumberGenerator {
         double z = seed;
         for (int i = 0; i < size; i++) {
             z = (a * z) % c;
-            numbers.add((double) z / c);
+            numbers.add( z / c);
         }
     }
 
