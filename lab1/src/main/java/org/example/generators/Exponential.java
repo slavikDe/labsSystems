@@ -25,7 +25,7 @@ public class Exponential extends NumberGenerator {
 
     @Override
     public void generateSamples(int size) {
-        System.out.println("Exponential Parameters: λ=" + lambda);
+//        System.out.println("Exponential Parameters: λ=" + lambda);
         numbers.clear();
         for (int i = 0; i < size; i++) {
             double u;
