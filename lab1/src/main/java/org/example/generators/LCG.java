@@ -29,7 +29,7 @@ public class LCG extends NumberGenerator {
 
     @Override
     public void generateSamples(int size) {
-        System.out.println("LCG Parameters: a=" + a + ", c=" + c + ", seed=" + seed);
+//        System.out.println("LCG Parameters: a=" + a + ", c=" + c + ", seed=" + seed);
         numbers.clear();
 
         double z = seed;
