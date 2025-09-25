@@ -4,19 +4,32 @@ import java.util.ArrayList;
 
 public class SimModel {
     public static void main(String[] args) {
-        Create c = new Create(2.0);
-        Process p = new Process(1.0);
-        System.out.println("id0 = " + c.getId() + " id1=" + p.getId());
-        c.setNextElement(p);
-        p.setMaxqueue(5);
+        double creatorDelay = 2.0;
+        double processorDelay = 1.0;
+        int processCount = 3;
+        int maxQueueSize = 5;
+        int numDevices = 3;
+        double simulationTime = 1000.0;
+        String distributionType = "exp";
+
+        Create c = new Create(creatorDelay);
         c.setName("CREATOR");
-        p.setName("PROCESSOR");
-        c.setDistribution("exp");
-        p.setDistribution("exp");
+        c.setDistribution(distributionType);
+
         ArrayList<Element> list = new ArrayList<>();
         list.add(c);
-        list.add(p);
+
+        for (int i = 0; i < processCount; i++) {
+            Process p = new Process(processorDelay, numDevices);
+            p.setName("PROCESSOR" + (i + 1));
+            p.setMaxQueue(maxQueueSize);
+            p.setDistribution(distributionType);
+
+            list.getLast().setNextElement(p);
+            list.add(p);
+        }
+
         Model model = new Model(list);
-        model.simulate(1000.0);
+        model.simulate(simulationTime);
     }
 }

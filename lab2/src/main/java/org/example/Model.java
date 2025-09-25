@@ -58,7 +58,9 @@ public class Model {
                 System.out.println("mean length of queue = " +
                         p.getMeanQueue() / tcurr
                         + "\nfailure probability = " +
-                        p.getFailure() / (double) p.getQuantity());
+                        p.getFailure() / (double) p.getQuantity()
+                        + "\ndevice utilization = " +
+                        String.format("%.2f%%", p.getDeviceUtilization(tcurr)));
             }
         }
     }
