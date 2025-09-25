@@ -5,6 +5,8 @@ public class Process extends Element {
     private double meanQueue;
     private int deviceCount;
     private double totalDeviceTime;
+    private static Process firstProcess; // Reference to first process in chain
+    private int redirectedCount; // Count of elements redirected to first process
 
     public Process(double delay) {
         super(delay);
@@ -13,6 +15,7 @@ public class Process extends Element {
         meanQueue = 0.0;
         deviceCount = 1;
         totalDeviceTime = 0.0;
+        redirectedCount = 0;
     }
 
     public Process(double delay, int deviceCount) {
@@ -22,6 +25,7 @@ public class Process extends Element {
         meanQueue = 0.0;
         this.deviceCount = deviceCount;
         totalDeviceTime = 0.0;
+        redirectedCount = 0;
     }
 
     @Override
@@ -43,9 +47,8 @@ public class Process extends Element {
     public void outAct() {
         super.outAct();
         setState(getState() - 1); // free one device
-        if (super.getNextElement() != null) {
-            super.getNextElement().inAct();
-        }
+
+        // Process queue first, before routing
         if (getQueue() > 0) {
             setQueue(getQueue() - 1);
             setState(getState() + 1);
@@ -53,6 +56,14 @@ public class Process extends Element {
         } else {
             // No queue - set to idle
             super.setTnext(Double.MAX_VALUE);
+        }
+
+        // Route element: 2% back to process1, 98% forward
+        if (Math.random() < 0.02 && getFirstProcess() != null && this != getFirstProcess()) {
+            redirectedCount++;
+            getFirstProcess().inAct();
+        } else if (super.getNextElement() != null) {
+            super.getNextElement().inAct();
         }
     }
 
@@ -89,12 +100,15 @@ public class Process extends Element {
         super.printInfo();
         System.out.println("failure = " + this.getFailure());
         System.out.println("devices in use = " + getState() + "/" + deviceCount);
+        System.out.println("redirected = " + redirectedCount);
     }
 
     @Override
     public void doStatistics(double delta) {
         meanQueue = getMeanQueue() + queue * delta;
-        totalDeviceTime += getState() * delta; // Track total device usage time
+        // Only count positive device states (devices actually in use)
+        int actualDevicesInUse = Math.max(0, Math.min(getState(), deviceCount));
+        totalDeviceTime += actualDevicesInUse * delta;
     }
 
     public double getDeviceUtilization(double totalTime) {
@@ -103,5 +117,17 @@ public class Process extends Element {
 
     public double getMeanQueue() {
         return meanQueue;
+    }
+
+    public static void setFirstProcess(Process process) {
+        firstProcess = process;
+    }
+
+    public static Process getFirstProcess() {
+        return firstProcess;
+    }
+
+    public int getRedirectedCount() {
+        return redirectedCount;
     }
 }

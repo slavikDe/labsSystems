@@ -121,6 +121,10 @@ public class Element {
     }
 
     public void outAct() {
+        increaseQuantity();
+    }
+
+    public void increaseQuantity() {
         quantity++;
     }
 

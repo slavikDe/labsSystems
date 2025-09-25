@@ -7,7 +7,7 @@ public class SimModel {
         double creatorDelay = 2.0;
         double processorDelay = 1.0;
         int processCount = 3;
-        int maxQueueSize = 5;
+        int maxQueueSize = 3;
         int numDevices = 3;
         double simulationTime = 1000.0;
         String distributionType = "exp";
@@ -19,11 +19,17 @@ public class SimModel {
         ArrayList<Element> list = new ArrayList<>();
         list.add(c);
 
+        Process firstProc = null;
         for (int i = 0; i < processCount; i++) {
             Process p = new Process(processorDelay, numDevices);
             p.setName("PROCESSOR" + (i + 1));
             p.setMaxQueue(maxQueueSize);
             p.setDistribution(distributionType);
+
+            if (i == 0) {
+                firstProc = p;
+                Process.setFirstProcess(firstProc); // Set reference to first process
+            }
 
             list.getLast().setNextElement(p);
             list.add(p);
