@@ -1,4 +1,4 @@
-package org.example.simsimple;
+package org.example.smo_universal.simsimple;
 
 import java.util.Random;
 
