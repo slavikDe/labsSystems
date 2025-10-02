@@ -1,5 +1,6 @@
 package org.example.smo_universal;
 
+import org.example.smo_universal.simsimple.Distribution;
 import org.example.smo_universal.simsimple.FunRand;
 
 public class Element {
@@ -7,7 +8,7 @@ public class Element {
     private String name;
     private double tnext;
     private double delayMean, delayDev;
-    private String distribution;
+    private Distribution distribution;
     private int quantity;
     private double tcurr;
     private int state;
@@ -17,7 +18,7 @@ public class Element {
     public Element() {
         tnext = Double.MAX_VALUE;
         delayMean = 1.0;
-        distribution = "exp";
+        distribution = Distribution.EXP;
         tcurr = tnext;
         state = 0;
         nextElement = null;
@@ -30,7 +31,7 @@ public class Element {
         name = "anonymus";
         tnext = 0.0;
         delayMean = delay;
-        distribution = "";
+        distribution = Distribution.EXP;
         tcurr = tnext;
         state = 0;
         nextElement = null;
@@ -43,7 +44,7 @@ public class Element {
         name = nameOfElement;
         tnext = 0.0;
         delayMean = delay;
-        distribution = "exp";
+        distribution = Distribution.EXP;
         tcurr = tnext;
         state = 0;
         nextElement = null;
@@ -54,19 +55,24 @@ public class Element {
 
     public double getDelay() {
         double delay = getDelayMean();
-        if ("exp".equalsIgnoreCase(getDistribution())) {
+        if (Distribution.EXP == getDistribution()) {
             delay = FunRand.Exp(getDelayMean());
         } else {
-            if ("norm".equalsIgnoreCase(getDistribution())) {
+            if (Distribution.NORMAL == getDistribution()) {
                 delay = FunRand.Norm(getDelayMean(),
                         getDelayDev());
             } else {
-                if ("unif".equalsIgnoreCase(getDistribution())) {
+                if (Distribution.UNIFORM == getDistribution()) {
                     delay = FunRand.Unif(getDelayMean(),
                             getDelayDev());
                 } else {
-                    if ("".equalsIgnoreCase(getDistribution()))
+                    if (Distribution.ERLAND == getDistribution()) {
+                        int k = (int) getDelayDev();
+                        delay = FunRand.Erlang(getDelayMean(), k);
+                    } else {
+                        // distribution unknown
                         delay = getDelayMean();
+                    }
                 }
             }
         }
@@ -81,11 +87,11 @@ public class Element {
         this.delayDev = delayDev;
     }
 
-    public String getDistribution() {
+    public Distribution getDistribution() {
         return distribution;
     }
 
-    public void setDistribution(String distribution) {
+    public void setDistribution(Distribution distribution) {
         this.distribution = distribution;
     }
 

@@ -60,6 +60,7 @@ public class Model {
                         + "\nfailure probability = " +
                         p.getFailure() / (double) p.getQuantity());
             }
+            System.out.println();
         }
     }
 }

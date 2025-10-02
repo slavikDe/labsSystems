@@ -1,5 +1,7 @@
 package org.example.smo_universal;
 
+import org.example.smo_universal.simsimple.Distribution;
+
 import java.util.ArrayList;
 
 public class SimModel {
@@ -11,8 +13,8 @@ public class SimModel {
         p.setMaxQueue(5);
         c.setName("CREATOR");
         p.setName("PROCESSOR");
-        c.setDistribution("exp");
-        p.setDistribution("exp");
+        c.setDistribution(Distribution.EXP);
+        p.setDistribution(Distribution.EXP);
         ArrayList<Element> list = new ArrayList<>();
         list.add(c);
         list.add(p);

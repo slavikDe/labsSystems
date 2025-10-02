@@ -1,10 +1,28 @@
 package org.example.smo_universal;
 
+
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+@Getter
+@Setter
 public class Process extends Element {
+    private final List<Element> possibleRoutes = new ArrayList<>();
+
+    private RoutingStrategy routingStrategy;
     private int queue, maxQueue, failure;
     private double meanQueue;
+    private double totalDeviceTime = 0.0;
 
-    private int devices;
+    private int devices = 1;
+
+    public Process() {
+
+    }
 
     public Process(double delay) {
         super(delay);
@@ -21,10 +39,19 @@ public class Process extends Element {
         this.devices = devices;
     }
 
+    /**
+     * Set possible routes for multi-route output
+     * @param elements possible next elements
+     */
+    public void setPossibleRoutes(Element... elements) {
+        possibleRoutes.clear();
+        possibleRoutes.addAll(Arrays.asList(elements));
+    }
+
     @Override
     public void inAct() {
-        if (super.getState() == 0) {
-            super.setState(0);
+        if (super.getState() < devices) {
+            super.setState(super.getState() + 1);
             super.setTnext(super.getTcurr() + super.getDelay());
         } else {
             if (getQueue() < getMaxQueue()) {
@@ -38,12 +65,31 @@ public class Process extends Element {
     @Override
     public void outAct() {
         super.outAct();
-        super.setTnext(Double.MAX_VALUE);
-        super.setState(0);
+        super.setState(super.getState() - 1);
         if (getQueue() > 0) {
             setQueue(getQueue() - 1);
-            super.setState(1);
+            super.setState(super.getState() + 1);
             super.setTnext(super.getTcurr() + super.getDelay());
+        } else {
+            super.setTnext(Double.MAX_VALUE);
+        }
+
+        // Multi-route logic: select next element using routing strategy
+        Element targetElement = null;
+
+        if (possibleRoutes.size() == 1) {
+            // Single route - use it directly
+            targetElement = possibleRoutes.get(0);
+        } else if (possibleRoutes.size() > 1 && routingStrategy != null) {
+            // Multiple routes - use routing strategy to select
+            targetElement = routingStrategy.selectNext(possibleRoutes, this);
+        } else if (super.getNextElement() != null) {
+            // Fallback to old single nextElement
+            targetElement = super.getNextElement();
+        }
+
+        if (targetElement != null) {
+            targetElement.inAct();
         }
     }
 
@@ -68,17 +114,24 @@ public class Process extends Element {
     }
 
     @Override
-    public void printInfo() {
-        super.printInfo();
-        System.out.println("failure = " + this.getFailure());
-    }
-
-    @Override
     public void doStatistics(double delta) {
         meanQueue = getMeanQueue() + queue * delta;
+        int devicesInUse = Math.min(super.getState(), devices);
+        totalDeviceTime += devicesInUse * delta;
     }
 
     public double getMeanQueue() {
         return meanQueue;
+    }
+
+    public double getDeviceUtilization(double totalTime) {
+        return (totalDeviceTime / (devices * totalTime)) * 100.0;
+    }
+
+    @Override
+    public void printInfo() {
+        super.printInfo();
+        System.out.println("failure = " + this.getFailure());
+        System.out.println("devices in use = " + super.getState() + "/" + devices);
     }
 }

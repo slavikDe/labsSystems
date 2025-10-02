@@ -52,4 +52,21 @@ public class FunRand {
         a = timeMean + timeDeviation * r.nextGaussian();
         return a;
     }
+
+    /**
+     * Generates a random value according to an Erlang distribution
+     * Erlang distribution is a sum of k exponential distributions with rate lambda
+     *
+     * @param timeMean mean value
+     * @param k shape parameter
+     * @return a random value according to an Erlang distribution
+     */
+    public static double Erlang(double timeMean, int k) {
+        double lambda = k / timeMean;
+        double sum = 0;
+        for (int i = 0; i < k; i++) {
+            sum += Exp(1.0 / lambda);
+        }
+        return sum;
+    }
 }
