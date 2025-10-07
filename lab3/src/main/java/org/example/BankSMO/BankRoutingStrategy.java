@@ -7,10 +7,10 @@ import org.example.smo_universal.RoutingStrategy;
 
 import java.util.List;
 
-public class BankRoutingStrategy implements RoutingStrategy<Element> {
+public class BankRoutingStrategy implements RoutingStrategy {
 
     @Override
-    public Element selectNext(List<Element> nextElements, Element currentElement) {
+    public Element selectNext(List nextElements, Element currentElement) {
         if(!(currentElement instanceof Create)) {throw new IllegalArgumentException("\"Bank routing requires create element for selecting next");}
 
         Process lane1, lane2;
@@ -46,5 +46,6 @@ public class BankRoutingStrategy implements RoutingStrategy<Element> {
             return lane2;
         }
     }
+
 
 }

@@ -13,7 +13,7 @@ import java.util.List;
 public class Process extends Element {
     private final List<Element> possibleRoutes = new ArrayList<>();
 
-    private RoutingStrategy routingStrategy;
+    private RoutingStrategy<Element> routingStrategy;
     private int queue, maxQueue, failure;
     private double meanQueue;
     private double totalDeviceTime = 0.0;
@@ -21,7 +21,9 @@ public class Process extends Element {
     private int devices = 1;
 
     public Process() {
-
+        this.queue = 0;
+        this.maxQueue = Integer.MAX_VALUE;
+        this.meanQueue = 0.0;
     }
 
     public Process(double delay) {
@@ -43,7 +45,7 @@ public class Process extends Element {
      * Set possible routes for multi-route output
      * @param elements possible next elements
      */
-    public void setPossibleRoutes(Element... elements) {
+    public final void setPossibleRoutes(Element... elements) {
         possibleRoutes.clear();
         possibleRoutes.addAll(Arrays.asList(elements));
     }
@@ -79,7 +81,7 @@ public class Process extends Element {
 
         if (possibleRoutes.size() == 1) {
             // Single route - use it directly
-            targetElement = possibleRoutes.get(0);
+            targetElement = possibleRoutes.getFirst();
         } else if (possibleRoutes.size() > 1 && routingStrategy != null) {
             // Multiple routes - use routing strategy to select
             targetElement = routingStrategy.selectNext(possibleRoutes, this);
@@ -88,6 +90,16 @@ public class Process extends Element {
             targetElement = super.getNextElement();
         }
 
+        // Allow subclasses to customize propagation (e.g., set patient type)
+        propagateToNextElement(targetElement);
+    }
+
+    /**
+     * Hook method for subclasses to customize how elements are propagated.
+     * Default behavior: simply call inAct() on target.
+     * Subclasses can override to add custom logic (e.g., setting patient type).
+     */
+    protected void propagateToNextElement(Element targetElement) {
         if (targetElement != null) {
             targetElement.inAct();
         }

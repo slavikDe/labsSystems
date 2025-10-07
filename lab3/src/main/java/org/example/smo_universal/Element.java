@@ -1,8 +1,10 @@
 package org.example.smo_universal;
 
+import lombok.Getter;
 import org.example.smo_universal.simsimple.Distribution;
 import org.example.smo_universal.simsimple.FunRand;
 
+@Getter
 public class Element {
     private static int nextId = 0;
     private String name;
@@ -79,44 +81,20 @@ public class Element {
         return delay;
     }
 
-    public double getDelayDev() {
-        return delayDev;
-    }
-
     public void setDelayDev(double delayDev) {
         this.delayDev = delayDev;
-    }
-
-    public Distribution getDistribution() {
-        return distribution;
     }
 
     public void setDistribution(Distribution distribution) {
         this.distribution = distribution;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public double getTcurr() {
-        return tcurr;
-    }
-
     public void setTcurr(double tcurr) {
         this.tcurr = tcurr;
     }
 
-    public int getState() {
-        return state;
-    }
-
     public void setState(int state) {
         this.state = state;
-    }
-
-    public Element getNextElement() {
-        return nextElement;
     }
 
     public void setNextElement(Element nextElement) {
@@ -130,24 +108,12 @@ public class Element {
         quantity++;
     }
 
-    public double getTnext() {
-        return tnext;
-    }
-
     public void setTnext(double tnext) {
         this.tnext = tnext;
     }
 
-    public double getDelayMean() {
-        return delayMean;
-    }
-
     public void setDelayMean(double delayMean) {
         this.delayMean = delayMean;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public void setId(int id) {
@@ -162,10 +128,6 @@ public class Element {
         System.out.println(getName() + " state= " + state +
                 " quantity = " + quantity +
                 " tnext= " + tnext);
-    }
-
-    public String getName() {
-        return name;
     }
 
     public void setName(String name) {
