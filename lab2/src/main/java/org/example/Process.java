@@ -28,12 +28,20 @@ public class Process extends Element {
     @Override
     public void outAct() {
         super.outAct();
-        super.setTnext(Double.MAX_VALUE);
-        super.setState(0);
+        setState(getState() - 1); // free one device
         if (getQueue() > 0) {
             setQueue(getQueue() - 1);
             super.setState(1);
             super.setTnext(super.getTcurr() + super.getDelay());
+        } else {
+            super.setTnext(Double.MAX_VALUE);
+        }
+        // Route element: 2% back to process1, 98% forward
+        if (Math.random() < 0.02 && getFirstProcess() != null && this != getFirstProcess()) {
+            redirectedCount++;
+            getFirstProcess().inAct();
+        } else if (super.getNextElement() != null) {
+            super.getNextElement().inAct();
         }
     }
 

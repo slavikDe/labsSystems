@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.simsimple.FunRand;
+import org.example.smo_universal.simsimple.FunRand;
 
 public class Element {
     private static int nextId = 0;
