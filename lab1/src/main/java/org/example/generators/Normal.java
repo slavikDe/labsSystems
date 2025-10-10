@@ -29,7 +29,7 @@ public class Normal extends NumberGenerator {
 
     @Override
     public void generateSamples(int size) {
-        System.out.println("Normal Parameters: μ=" + a + ", σ=" + sigma);
+//        System.out.println("Normal Parameters: μ=" + a + ", σ=" + sigma);
         numbers.clear();
         for(int i = 0; i < size; i++){
             numbers.add(generate());

@@ -27,19 +27,21 @@ public class Bank {
         lane2.setName("LANE_2");
         lane2.setMaxQueue(3);
 
+        // Set up lane switching
         lane1.setOtherLane(lane2);
         lane2.setOtherLane(lane1);
 
         c.setPossibleRoutes(lane1, lane2);
         c.setRoutingStrategy(new BankRoutingStrategy());
 
-        lane1.setState(1);
-        lane1.setQueue(2);
-        lane1.setTnext(c.getTcurr() + lane1.getDelay());
+        // Initial conditions: both cashiers busy, 2 cars waiting in each queue
+        lane1.setState(1); // cashier busy
+        lane1.setQueue(2); // 2 cars waiting
+        lane1.setTnext(c.getTcurr() + lane1.getDelay()); // will finish service soon
 
-        lane2.setState(1);
-        lane2.setQueue(2);
-        lane2.setTnext(c.getTcurr() + lane2.getDelay());
+        lane2.setState(1); // cashier busy
+        lane2.setQueue(2); // 2 cars waiting
+        lane2.setTnext(c.getTcurr() + lane2.getDelay()); // will finish service soon
 
         elements.add(lane1);
         elements.add(lane2);

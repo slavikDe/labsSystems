@@ -1,4 +1,4 @@
-package org.example;
+package org.example.smo_universal;
 
 import java.util.ArrayList;
 
@@ -58,11 +58,9 @@ public class Model {
                 System.out.println("mean length of queue = " +
                         p.getMeanQueue() / tcurr
                         + "\nfailure probability = " +
-                        (p.getFailure() / (double) (p.getQuantity() + p.getFailure()) * 100.0) + " %"
-                        + "\ndevice utilization = " +
-                        String.format("%.2f%%", p.getDeviceUtilization(tcurr))
-                        + "\nredirected count = " + p.getRedirectedCount());
+                        p.getFailure() / (double) p.getQuantity());
             }
+            System.out.println();
         }
     }
 }
