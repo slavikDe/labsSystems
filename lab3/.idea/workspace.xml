@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="cfdcf954-8d2c-4e98-a86e-977adc92e698" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab2/src/main/java/org/example/Create.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab2/src/main/java/org/example/Element.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab2/src/main/java/org/example/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab2/src/main/java/org/example/Element.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab2/src/main/java/org/example/Model.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab2/src/main/java/org/example/Process.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab2/src/main/java/org/example/Process.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab2/src/main/java/org/example/Process.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab2/src/main/java/org/example/SimModel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab2/src/main/java/org/example/simsimple/FunRand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HOSPITAL_SIMULATION_REPORT.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/BankSMO/Bank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/BankSMO/Bank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/BankSMO/LaneSwitchingProcess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/BankSMO/LaneSwitchingProcess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/HospitalSMO/Hospital.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/HospitalSMO/Hospital.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/HospitalSMO/HospitalCreate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/HospitalSMO/HospitalCreate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/HospitalSMO/HospitalProcess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/HospitalSMO/HospitalProcess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/smo_universal/Process.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/smo_universal/Process.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="33Su0jcDOXBiRN8OK6V5Jhd4gpf" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Bank.executor&quot;: &quot;Run&quot;,
+    &quot;Application.BankCopy.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Hospital.executor&quot;: &quot;Run&quot;,
+    &quot;Application.org.example.HospitalSMOClaude.Hospital.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.lab3 [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.lab3 [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.lab3 [package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.lab3 [validate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.lab3 [verify].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/slavik/repos/labsSystems/lab2&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.example.HospitalSMO" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/org/example/HospitalSMO" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.example.BankSMO" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Hospital">
+    <configuration name="Bank" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.BankSMO.Bank" />
+      <module name="lab3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.BankSMO.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BankCopy" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.BankSMO.BankCopy" />
+      <module name="lab3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.BankSMO.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Hospital" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.HospitalSMO.Hospital" />
+      <module name="lab3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.HospitalSMO.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="org.example.HospitalSMOClaude.Hospital" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.HospitalSMOClaude.Hospital" />
+      <module name="lab3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.HospitalSMOClaude.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Hospital" />
+        <item itemvalue="Application.Bank" />
+        <item itemvalue="Application.org.example.HospitalSMOClaude.Hospital" />
+        <item itemvalue="Application.BankCopy" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26830.84" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.26830.84" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cfdcf954-8d2c-4e98-a86e-977adc92e698" name="Changes" comment="" />
+      <created>1759322573383</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1759322573383</updated>
+      <workItem from="1759322574471" duration="9789000" />
+      <workItem from="1759409773984" duration="10767000" />
+      <workItem from="1759752475740" duration="17400000" />
+      <workItem from="1759825007729" duration="948000" />
+      <workItem from="1759825980951" duration="6315000" />
+      <workItem from="1759932596607" duration="607000" />
+      <workItem from="1760022412703" duration="2268000" />
+      <workItem from="1760094888350" duration="299000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
