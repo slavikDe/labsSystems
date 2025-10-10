@@ -1,14 +1,27 @@
 package org.example;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Getter
+@Setter
 public class Process extends Element {
-    private int queue, maxqueue, failure;
+    private int queue, maxQueue, failure;
     private double meanQueue;
+    private double process_speed;
+
+    List<Element> nextPossible = new ArrayList<>();
+    List<Double> nextPossibleProbability = new ArrayList<>();
+
+    public Process(){ }
 
     public Process(double delay) {
         super(delay);
         queue = 0;
-        maxqueue = Integer.MAX_VALUE;
-        meanQueue = 0.0;
+        maxQueue = Integer.MAX_VALUE;
     }
 
     @Override
@@ -17,7 +30,7 @@ public class Process extends Element {
             super.setState(1);
             super.setTnext(super.getTcurr() + super.getDelay());
         } else {
-            if (getQueue() < getMaxqueue()) {
+            if (getQueue() < getMaxQueue()) {
                 setQueue(getQueue() + 1);
             } else {
                 failure++;
@@ -28,8 +41,16 @@ public class Process extends Element {
     @Override
     public void outAct() {
         super.outAct();
+        if(!nextPossible.isEmpty()){
+            setNextElement(selectNextELement());
+        }
+        if(getNextElement() == null){
+            return; // dispose
+        }
         super.setTnext(Double.MAX_VALUE);
         super.setState(0);
+        getNextElement().setTaskSize(getTaskSize()); //  send task size to next element
+        getNextElement().inAct();
         if (getQueue() > 0) {
             setQueue(getQueue() - 1);
             super.setState(1);
@@ -37,24 +58,9 @@ public class Process extends Element {
         }
     }
 
-    public int getFailure() {
-        return failure;
-    }
-
-    public int getQueue() {
-        return queue;
-    }
-
-    public void setQueue(int queue) {
-        this.queue = queue;
-    }
-
-    public int getMaxqueue() {
-        return maxqueue;
-    }
-
-    public void setMaxqueue(int maxqueue) {
-        this.maxqueue = maxqueue;
+    @Override
+    public double getDelay(){
+        return getTaskSize() * process_speed;
     }
 
     @Override
@@ -68,7 +74,19 @@ public class Process extends Element {
         meanQueue = getMeanQueue() + queue * delta;
     }
 
-    public double getMeanQueue() {
-        return meanQueue;
+    private Element selectNextELement(){
+        double random = Math.random();
+        double c = 0;
+        for(int i = 0; i < nextPossible.size(); i++){
+            c += nextPossibleProbability.get(i);
+            if(random < c){
+               return nextPossible.get(i);
+            }
+        }
+        throw new RuntimeException("Wrong probabilities for " + getTaskSize() + " element");
+    }
+
+    public void setNextPossibleProbability(List<Double> probabilities) {
+        nextPossibleProbability.addAll(probabilities);
     }
 }
