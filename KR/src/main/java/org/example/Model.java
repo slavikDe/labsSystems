@@ -1,5 +1,8 @@
     package org.example;
 
+import org.example.model_parts.Element;
+import org.example.model_parts.Process;
+
 import java.util.ArrayList;
 
 public class Model {
@@ -59,6 +62,8 @@ public class Model {
                         p.getMeanQueue() / tcurr
                         + "\nfailure probability = " +
                         p.getFailure() / (double) p.getQuantity());
+
+                System.out.println("In queue left: " + p.getQueue().size() + '\n');
             }
         }
     }

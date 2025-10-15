@@ -1,4 +1,4 @@
-package org.example;
+package org.example.model_parts;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +17,6 @@ public class Element {
     private double tcurr;
     private int state;
     private Element nextElement;
-    private double taskSize;
 
     private int id;
 
@@ -89,4 +88,5 @@ public class Element {
 
     public void doStatistics(double delta) {
     }
+
 }

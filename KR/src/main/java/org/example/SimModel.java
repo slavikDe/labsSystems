@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.model_parts.*;
+import org.example.model_parts.Process;
 import org.example.simsimple.Distribution;
 
 import java.util.ArrayList;
@@ -7,8 +9,8 @@ import java.util.List;
 
 
 public class SimModel {
-    private static final double CREATE_DELAY_DEV = 100;
-    private static final double CREATE_DELAY_MEAN = 300;
+    private static final double CREATE_DELAY_DEV = 100; // 100
+    private static final double CREATE_DELAY_MEAN = 300; // 300
     private static final double SIMULATION_TIME = 50_000;
     private static final double TASK_SIZE_MEAN = 500;
     private static final double TASK_SIZE_DEV = 200;
@@ -18,12 +20,13 @@ public class SimModel {
     public static void main(String[] args) {
         Create c = new Create(CREATE_DELAY_MEAN, CREATE_DELAY_DEV);
         c.setDistribution(Distribution.UNIFORM);
-        c.createTask(TASK_SIZE_MEAN, TASK_SIZE_DEV);
+        c.setTaskSizeMean(TASK_SIZE_MEAN);
+        c.setTaskSizeDev(TASK_SIZE_DEV);
         c.setName("Create");
 
-        Process d1 = new Process();
+        Input d1 = new Input();
         Process d2 = new Process();
-        Process d3 = new Process();
+        Output d3 = new Output();
         d1.setName("D1");
         d2.setName("D2");
         d3.setName("D3");
@@ -42,27 +45,12 @@ public class SimModel {
         d3.setNextPossibleProbability(List.of(PROBABILITY_OF_INCORRECT_TASK_PROCESSING, 1 - PROBABILITY_OF_INCORRECT_TASK_PROCESSING));
 
         // queue size
-        d1.setMaxQueue(10);
-        d2.setMaxQueue(10);
-        d3.setMaxQueue(10);
+        d1.setMaxQueue(100);
+        d2.setMaxQueue(100);
+        d3.setMaxQueue(100);
 
         ArrayList<Element> list = new ArrayList<>(List.of(c, d1, d2, d3));
         Model model = new Model(list);
         model.simulate(SIMULATION_TIME);
-
-//        Create c = new Create(2.0);
-//        Process p = new Process(1.0);
-//        System.out.println("id0 = " + c.getId() + " id1=" + p.getId());
-//        c.setNextElement(p);
-//        p.setMaxQueue(5);
-//        c.setName("CREATOR");
-//        p.setName("PROCESSOR");
-//        c.setDistribution("exp");
-//        p.setDistribution("exp");
-//        ArrayList<Element> list = new ArrayList<>();
-//        list.add(c);
-//        list.add(p);
-//        Model model = new Model(list);
-//        model.simulate(1000.0);
     }
 }
