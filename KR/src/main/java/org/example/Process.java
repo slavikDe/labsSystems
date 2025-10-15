@@ -3,15 +3,23 @@ package org.example;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.swing.text.rtf.RTFEditorKit;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.PriorityQueue;
 
 @Getter
 @Setter
 public class Process extends Element {
-    private int queue, maxQueue, failure;
+    private PriorityQueue<Task> queue = new PriorityQueue<>(
+            Comparator.comparing(Task::isRecycle, Comparator.reverseOrder())
+                    .thenComparingDouble(Task::getTaskSize)
+    );
+    private int  maxQueue, failure;
     private double meanQueue;
     private double process_speed;
+    private Task currentTask;
 
     List<Element> nextPossible = new ArrayList<>();
     List<Double> nextPossibleProbability = new ArrayList<>();
@@ -20,47 +28,54 @@ public class Process extends Element {
 
     public Process(double delay) {
         super(delay);
-        queue = 0;
+        queue.clear();
         maxQueue = Integer.MAX_VALUE;
     }
 
     @Override
     public void inAct() {
-        if (super.getState() == 0) {
+        if (super.getState() == 0 && !queue.isEmpty()) {
             super.setState(1);
-            super.setTnext(super.getTcurr() + super.getDelay());
-        } else {
-            if (getQueue() < getMaxQueue()) {
-                setQueue(getQueue() + 1);
-            } else {
-                failure++;
-            }
+            currentTask = queue.poll();
+            super.setTnext(super.getTcurr() + getDelay());
         }
     }
+
+    //   @Override
+    //    public void outAct() {
+    //        super.outAct();
+    //        super.setTnext(Double.MAX_VALUE);
+    //        super.setState(0);
+    //        if (getQueue() > 0) {
+    //            setQueue(getQueue() - 1);
+    //            super.setState(1);
+    //            super.setTnext(super.getTcurr() + super.getDelay());
+    //        }
+    //    }
+
 
     @Override
     public void outAct() {
         super.outAct();
+
+//        Task processedTask = queue.poll(); // remove processed task
+        super.setTnext(Double.MAX_VALUE);
+        super.setState(0);
+
         if(!nextPossible.isEmpty()){
             setNextElement(selectNextELement());
         }
-        if(getNextElement() == null){
-            return; // dispose
+        getNextElement().inAct(processedTask); // send task to next stage of processing
+
+        if(!priorityQueue.isEmpty()){
+
         }
-        super.setTnext(Double.MAX_VALUE);
-        super.setState(0);
-        getNextElement().setTaskSize(getTaskSize()); //  send task size to next element
-        getNextElement().inAct();
-        if (getQueue() > 0) {
-            setQueue(getQueue() - 1);
-            super.setState(1);
-            super.setTnext(super.getTcurr() + super.getDelay());
-        }
+
     }
 
     @Override
     public double getDelay(){
-        return getTaskSize() * process_speed;
+        return currentTask.getTaskSize() * process_speed;
     }
 
     @Override
@@ -71,7 +86,7 @@ public class Process extends Element {
 
     @Override
     public void doStatistics(double delta) {
-        meanQueue = getMeanQueue() + queue * delta;
+        meanQueue = getMeanQueue() + priorityQueue.size() * delta;
     }
 
     private Element selectNextELement(){
@@ -83,10 +98,14 @@ public class Process extends Element {
                return nextPossible.get(i);
             }
         }
-        throw new RuntimeException("Wrong probabilities for " + getTaskSize() + " element");
+        throw new RuntimeException("Wrong probabilities for " + this.getId() + " " + this.getName() + " element");
     }
 
     public void setNextPossibleProbability(List<Double> probabilities) {
         nextPossibleProbability.addAll(probabilities);
+    }
+
+    public void increaseFailure(){
+        failure++;
     }
 }

@@ -5,20 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="19c90fc8-cc9e-4d57-a738-1c6faaf709d8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Dispose.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/simsimple/Distribution.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Task.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/task.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../TPO/lab6/MpiMatrixMultiplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../TPO/lab6/MpiMatrixMultiplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../TPO/lab6/MpiMatrixMultiplicationNonBlocking.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../TPO/lab6/MpiMatrixMultiplicationNonBlocking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../TPO/lab8/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../TPO/lab8/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../TPO/lab8/MatrixClientWithData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../TPO/lab8/MatrixClientWithData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../TPO/lab8/MatrixClientWithoutData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../TPO/lab8/MatrixClientWithoutData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../TPO/lab8/MatrixServerWithData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../TPO/lab8/MatrixServerWithData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../TPO/lab8/MatrixServerWithoutData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../TPO/lab8/MatrixServerWithoutData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../TPO/lab8/TestConnectionClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../TPO/lab8/TestConnectionClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../TPO/matrix_muliplier/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../TPO/matrix_muliplier/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../TPO/matrix_muliplier/src/main/java/org/example/Stripe/StripedMatrixMultiplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../TPO/matrix_muliplier/src/main/java/org/example/Stripe/StripedMatrixMultiplier.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/dictionaries/project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/dictionaries/project.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Create.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Create.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Element.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Model.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Process.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Process.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/SimModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/SimModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/smo_universal/simsimple/FunRand.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/smo_universal/simsimple/FunRand.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +55,8 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.SimModel.executor": "Run",
+    "Application.SimModel.executor": "Debug",
+    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
@@ -54,7 +64,7 @@
     "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/slavik/repos/labsSystems",
+    "last_opened_file_path": "/home/slavik/repos/labsSystems/KR",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -63,7 +73,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "settings.editor.selected.configurable": "editor.preferences.inline.completion",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
@@ -104,7 +114,11 @@
       <option name="presentableId" value="Default" />
       <updated>1760096024094</updated>
       <workItem from="1760096025002" duration="1351000" />
-      <workItem from="1760107567791" duration="5750000" />
+      <workItem from="1760107567791" duration="6031000" />
+      <workItem from="1760174650662" duration="336000" />
+      <workItem from="1760196958609" duration="1638000" />
+      <workItem from="1760283499103" duration="106000" />
+      <workItem from="1760525192879" duration="6870000" />
     </task>
     <servers />
   </component>
@@ -114,10 +128,14 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/Process.java</url>
-          <line>46</line>
-          <option name="timeStamp" value="1" />
+          <line>57</line>
+          <properties class="org.example.Process" method="outAct">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

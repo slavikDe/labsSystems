@@ -17,7 +17,6 @@ public class Element {
     private double tcurr;
     private int state;
     private Element nextElement;
-    private double taskSize;
 
     private int id;
 
@@ -89,4 +88,5 @@ public class Element {
 
     public void doStatistics(double delta) {
     }
+
 }

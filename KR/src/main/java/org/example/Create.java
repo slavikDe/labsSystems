@@ -1,8 +1,13 @@
 package org.example;
 
+import lombok.Setter;
 import org.example.simsimple.FunRand;
 
+@Setter
 public class Create extends Element {
+    private double taskSizeMean;
+    private double taskSizeDev;
+
     public Create(double delayMean, double delayDev) {
         super.setDelayDev(delayDev);
         super.setDelayMean(delayMean);
@@ -11,14 +16,22 @@ public class Create extends Element {
 
     @Override
     public void outAct() {
-        super.outAct();
+        super.outAct(); // increment quantity
         super.setTnext(super.getTcurr() + super.getDelay());
-        getNextElement().setTaskSize(getTaskSize()); //  send task size to next element
-        super.getNextElement().inAct();
+        double taskSize = createTask(taskSizeMean, taskSizeDev);
 
+        if(getNextElement() instanceof Process){
+            Process nextElement = (Process) getNextElement();
+            if(nextElement.getMaxQueue() > nextElement.getQueue().size()){
+                nextElement.getQueue().offer(new Task(taskSize));
+            } else { // exist free place in queue
+                nextElement.increaseFailure();
+            }
+        }
+        super.getNextElement().inAct();
     }
 
-    public void createTask(double taskSizeMean, double taskSizeDev) {
-        super.setTaskSize(FunRand.Unif(taskSizeMean, taskSizeDev));
+    private double createTask(double taskSizeMean, double taskSizeDev) {
+        return FunRand.Unif(taskSizeMean, taskSizeDev);
     }
 }
