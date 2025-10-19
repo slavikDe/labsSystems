@@ -63,7 +63,7 @@ public class Element {
         switch (getDistribution()) {
             case EXPONENTIAL -> delay = FunRand.Exp(getDelayMean());
             case NORMAL -> delay = FunRand.Norm(getDelayMean(), getDelayDev());
-            case UNIFORM ->  delay = FunRand.Unif(getDelayMean(), getDelayDev());
+            case UNIFORM ->  delay = FunRand.Unif(getDelayMean() - getDelayDev(), getDelayMean() + getDelayDev());
             default ->  delay = getDelayMean();
         }
       
@@ -87,6 +87,10 @@ public class Element {
     }
 
     public void doStatistics(double delta) {
+    }
+
+    public static void resetIdCounter() {
+        nextId = 0;
     }
 
 }

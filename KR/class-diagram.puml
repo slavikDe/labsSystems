@@ -1,0 +1,134 @@
+@startuml SimulationModel
+
+' Main simulation classes
+package "org.example" {
+    class Model {
+        - list: ArrayList<Element>
+        - tnext: double
+        - tcurr: double
+        - event: int
+        + Model(elements: ArrayList<Element>)
+        + simulate(time: double): void
+        + printInfo(): void
+        + printResult(): void
+    }
+
+    class Task {
+        - taskSize: double
+        - isRecycle: boolean
+        + Task()
+        + Task(taskSize: double)
+    }
+
+    class SimModel {
+        {static} - CREATE_DELAY_DEV: double
+        {static} - CREATE_DELAY_MEAN: double
+        {static} - SIMULATION_TIME: double
+        {static} - TASK_SIZE_MEAN: double
+        {static} - TASK_SIZE_DEV: double
+        {static} - PROBABILITY_OF_INCORRECT_TASK_PROCESSING: double
+        {static} - PROCESS_SPEED: double
+        {static} + main(args: String[]): void
+    }
+}
+
+package "org.example.model_parts" {
+    abstract class Element {
+        {static} - nextId: int
+        - name: String
+        - tnext: double
+        - delayMean: double
+        - delayDev: double
+        - distribution: Distribution
+        - quantity: int
+        - tcurr: double
+        - state: int
+        - nextElement: Element
+        - id: int
+        + Element()
+        + Element(delay: double)
+        + Element(nameOfElement: String, delay: double)
+        + getDelay(): double
+        + inAct(): void
+        + outAct(): void
+        + printResult(): void
+        + printInfo(): void
+        + doStatistics(delta: double): void
+    }
+
+    class Create {
+        - taskSizeMean: double
+        - taskSizeDev: double
+        + Create(delayMean: double, delayDev: double)
+        + outAct(): void
+        - createTask(taskSizeMean: double, taskSizeDev: double): double
+    }
+
+    class Process {
+        - queue: PriorityQueue<Task>
+        - maxQueue: int
+        - failure: int
+        - meanQueue: double
+        - process_speed: double
+        - currentTask: Task
+        - nextPossible: List<Element>
+        - nextPossibleProbability: List<Double>
+        + Process()
+        + Process(delay: double)
+        + inAct(): void
+        + outAct(): void
+        + getDelay(): double
+        + printInfo(): void
+        + doStatistics(delta: double): void
+        - selectNextElement(): Element
+        + setNextPossibleProbability(probabilities: List<Double>): void
+        + increaseFailure(): void
+    }
+
+    class Input {
+    }
+
+    class Output {
+    }
+
+    class Dispose {
+    }
+}
+
+package "org.example.simsimple" {
+    enum Distribution {
+        EXPONENTIAL
+        NORMAL
+        UNIFORM
+    }
+
+    class FunRand {
+        {static} + Exp(timeMean: double): double
+        {static} + Unif(timeMin: double, timeMax: double): double
+        {static} + Norm(timeMean: double, timeDeviation: double): double
+    }
+}
+
+' Inheritance relationships
+Element <|-- Create
+Element <|-- Process
+Element <|-- Dispose
+Process <|-- Input
+Process <|-- Output
+
+' Associations
+Model "1" *-- "many" Element : contains
+Element --> Element : nextElement
+Element --> Distribution : uses
+Create ..> Task : creates
+Process "1" o-- "many" Task : queues
+Process --> Element : nextPossible
+Element ..> FunRand : uses
+SimModel ..> Model : instantiates
+SimModel ..> Create : configures
+SimModel ..> Input : configures
+SimModel ..> Output : configures
+SimModel ..> Process : configures
+SimModel ..> Dispose : configures
+
+@enduml

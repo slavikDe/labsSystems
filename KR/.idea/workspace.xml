@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="19c90fc8-cc9e-4d57-a738-1c6faaf709d8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Task.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/task.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/pipeline.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/validation_size.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../TPO/lab6/MpiMatrixMultiplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../TPO/lab6/MpiMatrixMultiplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../TPO/lab6/MpiMatrixMultiplicationNonBlocking.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../TPO/lab6/MpiMatrixMultiplicationNonBlocking.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../TPO/lab8/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../TPO/lab8/Config.java" afterDir="false" />
@@ -20,14 +20,16 @@
       <change beforePath="$PROJECT_DIR$/../.idea/dictionaries/project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/dictionaries/project.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Create.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Create.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Element.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Process.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Process.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Create.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Model.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/SimModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/SimModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model_parts/Create.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model_parts/Create.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model_parts/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model_parts/Element.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model_parts/Process.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model_parts/Process.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab3/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lab3/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lab3/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +57,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.SimModel.executor": "Debug",
+    "Application.SimModel.executor": "Run",
+    "Application.SimModelTest (1).executor": "Run",
+    "Application.SimModelTest.executor": "Run",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -64,7 +68,7 @@
     "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/slavik/repos/labsSystems/KR",
+    "last_opened_file_path": "/home/slavik/repos/labsSystems/lab3",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -78,7 +82,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.SimModelTest">
     <configuration name="SimModel" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.SimModel" />
       <module name="KR" />
@@ -92,9 +96,37 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SimModelTest (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.SimModelTest" />
+      <module name="KR" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SimModelTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.SimModelTest" />
+      <module name="KR" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.SimModelTest" />
         <item itemvalue="Application.SimModel" />
+        <item itemvalue="Application.SimModelTest (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -119,25 +151,20 @@
       <workItem from="1760196958609" duration="1638000" />
       <workItem from="1760283499103" duration="106000" />
       <workItem from="1760525192879" duration="6870000" />
+      <workItem from="1760548459189" duration="551000" />
+      <workItem from="1760610452048" duration="2484000" />
+      <workItem from="1760617169267" duration="2241000" />
+      <workItem from="1760691960029" duration="663000" />
+      <workItem from="1760692648187" duration="6474000" />
+      <workItem from="1760799849483" duration="5109000" />
+      <workItem from="1760862951048" duration="3561000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/Process.java</url>
-          <line>57</line>
-          <properties class="org.example.Process" method="outAct">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.puml" />
   </component>
 </project>

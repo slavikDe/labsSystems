@@ -1,0 +1,7 @@
+    - CREATE_DELAY_MEAN: 6 tests
+    - CREATE_DELAY_DEV: 5 tests
+    - TASK_SIZE_MEAN: 6 tests
+    - TASK_SIZE_DEV: 5 tests
+    - PROBABILITY_OF_INCORRECT: 6 tests
+    - PROCESS_SPEED: 6 tests
+    - MAX_QUEUE: 5 tests

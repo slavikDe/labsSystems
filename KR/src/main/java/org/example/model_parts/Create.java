@@ -17,21 +17,21 @@ public class Create extends Element {
 
     @Override
     public void outAct() {
-        super.outAct(); // increment quantity
+        super.outAct();
         super.setTnext(super.getTcurr() + super.getDelay());
-        double taskSize = createTask(taskSizeMean, taskSizeDev);
+        Task task  = createTask(taskSizeMean, taskSizeDev);
 
         if(getNextElement() instanceof Process nextElement){
             if(nextElement.getMaxQueue() > nextElement.getQueue().size()){
-                nextElement.getQueue().offer(new Task(taskSize));
+                nextElement.getQueue().offer(task);
                 super.getNextElement().inAct();
-            } else { // exist free place in queue
+            } else {
                 nextElement.increaseFailure();
             }
         }
     }
 
-    private double createTask(double taskSizeMean, double taskSizeDev) {
-        return FunRand.Unif(taskSizeMean, taskSizeDev);
+    private Task createTask(double taskSizeMean, double taskSizeDev) {
+        return new Task(FunRand.Unif(taskSizeMean - taskSizeDev, taskSizeMean + taskSizeDev));
     }
 }

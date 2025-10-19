@@ -6,10 +6,17 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Task {
+    private static int counter = 0;
+
     private double taskSize;
     private boolean isRecycle = false;
 
     public Task() {}
-    public Task(double taskSize) { this.taskSize = taskSize;}
+    public Task(double taskSize) { this.taskSize = taskSize;
+        counter++;
+//        System.out.format(
+//                "Task #%d created, size - %f\n", counter, taskSize
+//        );
+    }
 
 }

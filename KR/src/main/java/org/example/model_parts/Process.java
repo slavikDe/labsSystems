@@ -21,6 +21,7 @@ public class Process extends Element {
     private double meanQueue;
     private double process_speed;
     private Task currentTask;
+    private double busyTime;
 
     List<Element> nextPossible = new ArrayList<>();
     List<Double> nextPossibleProbability = new ArrayList<>();
@@ -45,20 +46,17 @@ public class Process extends Element {
     @Override
     public void outAct() {
         super.outAct();
-
         super.setTnext(Double.MAX_VALUE);
         super.setState(0);
 
         if(!nextPossible.isEmpty()){
             setNextElement(selectNextELement());
         }
-
         if(getNextElement() instanceof Process nextElement){
             if(nextElement.getName().equals("D1")){
                 currentTask.setRecycle(true);
             }
-
-            if(nextElement.getMaxQueue() > nextElement.getQueue().size()){
+            if(nextElement.getMaxQueue() >= nextElement.getQueue().size()){
                 nextElement.getQueue().add(currentTask);
                 getNextElement().inAct();
             }
@@ -66,11 +64,15 @@ public class Process extends Element {
                 nextElement.increaseFailure();
             }
         }
+        this.inAct();
+//        │╎   67 +                                                                                                                                                                                                                                         ╎│
+//│╎   68 +          // After finishing current task, check if there's another task in queue to process                                                                                                                                             ╎│
+//│╎   69 +          this.inAct();
     }
 
     @Override
     public double getDelay(){
-        return currentTask.getTaskSize() * process_speed;
+        return currentTask.getTaskSize() / process_speed;
     }
 
     @Override
@@ -81,7 +83,10 @@ public class Process extends Element {
 
     @Override
     public void doStatistics(double delta) {
-            meanQueue = getMeanQueue() + queue.size() * delta;
+        meanQueue = getMeanQueue() + queue.size() * delta;
+        if (super.getState() == 1) {
+            busyTime += delta;
+        }
     }
 
     private Element selectNextELement(){

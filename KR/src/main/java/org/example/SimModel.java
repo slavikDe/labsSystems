@@ -9,11 +9,14 @@ import java.util.List;
 
 
 public class SimModel {
-    private static final double CREATE_DELAY_DEV = 100; // 100
+    private static final double SIMULATION_TIME = 25_000;
+
     private static final double CREATE_DELAY_MEAN = 300; // 300
-    private static final double SIMULATION_TIME = 50_000;
+    private static final double CREATE_DELAY_DEV = 100; // 100
+
     private static final double TASK_SIZE_MEAN = 500;
     private static final double TASK_SIZE_DEV = 200;
+
     private static final double PROBABILITY_OF_INCORRECT_TASK_PROCESSING = 0.05;
     private static final double PROCESS_SPEED = 0.5;
 
