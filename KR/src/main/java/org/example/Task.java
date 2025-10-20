@@ -10,6 +10,7 @@ public class Task {
 
     private double taskSize;
     private boolean isRecycle = false;
+    private double finishTime = Double.MAX_VALUE;
 
     public Task() {}
     public Task(double taskSize) { this.taskSize = taskSize;

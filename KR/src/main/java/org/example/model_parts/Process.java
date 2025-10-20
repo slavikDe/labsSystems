@@ -17,27 +17,14 @@ public class Process extends Element {
     private PriorityQueue<Task> queue = new PriorityQueue<>(
             Comparator.comparing(Task::isRecycle, Comparator.reverseOrder())
                     .thenComparingDouble(Task::getTaskSize));
-    private Map<Integer, TaskInProgress> activeTasks = new HashMap<>();
 
+    private Map<Integer, Task> activeTasks = new HashMap<>();
 
     private int maxQueue, failure;
     private double meanQueue;
     private double busyTime;
     private int devices = 1; // default
     private double process_speed;
-
-
-    @Getter
-    @Setter
-    private static class TaskInProgress {
-        private Task task;
-        private double finishTime;
-
-        public TaskInProgress(Task task, double finishTime) {
-            this.task = task;
-            this.finishTime = finishTime;
-        }
-    }
 
     List<Element> nextPossible = new ArrayList<>();
     List<Double> nextPossibleProbability = new ArrayList<>();
@@ -52,8 +39,6 @@ public class Process extends Element {
         maxQueue = Integer.MAX_VALUE;
     }
 
-
-
     @Override
     public void inAct() {
         while (super.getState() < devices && !queue.isEmpty()) {
@@ -64,8 +49,8 @@ public class Process extends Element {
             while (activeTasks.containsKey(deviceId)) {
                 deviceId++;
             }
-
-            activeTasks.put(deviceId, new TaskInProgress(task, finishTime));
+            task.setFinishTime(finishTime);
+            activeTasks.put(deviceId, task);
             super.setState(super.getState() + 1);
         }
 
@@ -77,9 +62,9 @@ public class Process extends Element {
             super.setTnext(Double.MAX_VALUE);
         } else {
             double minFinishTime = Double.MAX_VALUE;
-            for (TaskInProgress tip : activeTasks.values()) {
-                if (tip.getFinishTime() < minFinishTime) {
-                    minFinishTime = tip.getFinishTime();
+            for (Task task : activeTasks.values()) {
+                if (task.getFinishTime() < minFinishTime) {
+                    minFinishTime = task.getFinishTime();
                 }
             }
             super.setTnext(minFinishTime);
@@ -90,8 +75,6 @@ public class Process extends Element {
     public void outAct() {
         super.outAct();
 
-//        List<Integer> completedDeviceIds = new ArrayList<>();
-        // ???
         int completedDeviceId = 0;
         for(Integer deviceId : activeTasks.keySet()) {
             if(activeTasks.get(deviceId).getFinishTime() <= super.getTcurr()) {
@@ -99,13 +82,7 @@ public class Process extends Element {
             }
         }
 
-//        for (Map.Entry<Integer, TaskInProgress> entry : activeTasks.entrySet()) {
-//            if (Math.abs(entry.getValue().getFinishTime() - super.getTcurr()) < 0.0001) {
-//                completedDeviceIds.add(entry.getKey());
-//            }
-//        }
-        TaskInProgress completed = activeTasks.remove(completedDeviceId);
-        Task completedTask = completed.getTask();
+        Task completedTask = activeTasks.remove(completedDeviceId);
         if(super.getState() > 0) {
             super.setState(super.getState() - 1);
         }
@@ -125,31 +102,6 @@ public class Process extends Element {
                 nextElement.increaseFailure();
             }
         }
-//        for (Integer deviceId : completedDeviceIds) {
-//            TaskInProgress completed = activeTasks.remove(deviceId);
-//            Task completedTask = completed.getTask();
-//
-//            if (super.getState() > 0) {
-//                super.setState(super.getState() - 1);
-//            }
-//
-//            if (!nextPossible.isEmpty()) {
-//                setNextElement(selectNextELement());
-//            }
-//
-//            if (getNextElement() instanceof Process nextElement) {
-//                if (nextElement.getName().equals("D1")) {
-//                    completedTask.setRecycle(true);
-//                }
-//                if (nextElement.getMaxQueue() >= nextElement.getQueue().size()) {
-//                    nextElement.getQueue().add(completedTask);
-//                    nextElement.inAct();
-//                } else {
-//                    nextElement.increaseFailure();
-//                }
-//            }
-//        }
-
         this.inAct();
     }
 
