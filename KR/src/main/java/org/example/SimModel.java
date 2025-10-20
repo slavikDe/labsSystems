@@ -10,7 +10,6 @@ import java.util.List;
 
 public class SimModel {
     private static final double SIMULATION_TIME = 25_000;
-
     private static final double CREATE_DELAY_MEAN = 300; // 300
     private static final double CREATE_DELAY_DEV = 100; // 100
 
@@ -19,6 +18,13 @@ public class SimModel {
 
     private static final double PROBABILITY_OF_INCORRECT_TASK_PROCESSING = 0.05;
     private static final double PROCESS_SPEED = 0.5;
+
+    // Number of devices for each process (1 for sequential, >1 for parallel)
+
+    private static final int DEVICES = 3;
+    private static final int D1_DEVICES = DEVICES;
+    private static final int D2_DEVICES = DEVICES;
+    private static final int D3_DEVICES = DEVICES;
 
     public static void main(String[] args) {
         Create c = new Create(CREATE_DELAY_MEAN, CREATE_DELAY_DEV);
@@ -37,6 +43,11 @@ public class SimModel {
         d1.setProcess_speed(PROCESS_SPEED);
         d2.setProcess_speed(PROCESS_SPEED);
         d3.setProcess_speed(PROCESS_SPEED);
+
+        // Configure device counts
+        d1.setDevices(D1_DEVICES);
+        d2.setDevices(D2_DEVICES);
+        d3.setDevices(D3_DEVICES);
 
         Dispose d = new Dispose();
 

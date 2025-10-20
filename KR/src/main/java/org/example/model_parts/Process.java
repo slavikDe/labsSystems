@@ -4,11 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 import org.example.Task;
 
-import javax.swing.text.rtf.RTFEditorKit;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.HashMap;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -16,17 +17,34 @@ public class Process extends Element {
     private PriorityQueue<Task> queue = new PriorityQueue<>(
             Comparator.comparing(Task::isRecycle, Comparator.reverseOrder())
                     .thenComparingDouble(Task::getTaskSize));
+    private Map<Integer, TaskInProgress> activeTasks = new HashMap<>();
+
 
     private int maxQueue, failure;
     private double meanQueue;
-    private double process_speed;
-    private Task currentTask;
     private double busyTime;
+    private int devices = 1; // default
+    private double process_speed;
+
+
+    @Getter
+    @Setter
+    private static class TaskInProgress {
+        private Task task;
+        private double finishTime;
+
+        public TaskInProgress(Task task, double finishTime) {
+            this.task = task;
+            this.finishTime = finishTime;
+        }
+    }
 
     List<Element> nextPossible = new ArrayList<>();
     List<Double> nextPossibleProbability = new ArrayList<>();
 
-    public Process(){ }
+    public Process(){
+        devices =4;
+    }
 
     public Process(double delay) {
         super(delay);
@@ -34,45 +52,109 @@ public class Process extends Element {
         maxQueue = Integer.MAX_VALUE;
     }
 
+
+
     @Override
     public void inAct() {
-        if (super.getState() == 0 && !queue.isEmpty()) {
-            super.setState(1);
-            currentTask = queue.poll();
-            super.setTnext(super.getTcurr() + getDelay());
+        while (super.getState() < devices && !queue.isEmpty()) {
+            Task task = queue.poll();
+            double finishTime = super.getTcurr() + calculateDelay(task);
+
+            int deviceId = 0;
+            while (activeTasks.containsKey(deviceId)) {
+                deviceId++;
+            }
+
+            activeTasks.put(deviceId, new TaskInProgress(task, finishTime));
+            super.setState(super.getState() + 1);
+        }
+
+        updateTnext();
+    }
+
+    private void updateTnext() {
+        if (activeTasks.isEmpty()) {
+            super.setTnext(Double.MAX_VALUE);
+        } else {
+            double minFinishTime = Double.MAX_VALUE;
+            for (TaskInProgress tip : activeTasks.values()) {
+                if (tip.getFinishTime() < minFinishTime) {
+                    minFinishTime = tip.getFinishTime();
+                }
+            }
+            super.setTnext(minFinishTime);
         }
     }
 
     @Override
     public void outAct() {
         super.outAct();
-        super.setTnext(Double.MAX_VALUE);
-        super.setState(0);
 
-        if(!nextPossible.isEmpty()){
+//        List<Integer> completedDeviceIds = new ArrayList<>();
+        // ???
+        int completedDeviceId = 0;
+        for(Integer deviceId : activeTasks.keySet()) {
+            if(activeTasks.get(deviceId).getFinishTime() <= super.getTcurr()) {
+                completedDeviceId =  deviceId;
+            }
+        }
+
+//        for (Map.Entry<Integer, TaskInProgress> entry : activeTasks.entrySet()) {
+//            if (Math.abs(entry.getValue().getFinishTime() - super.getTcurr()) < 0.0001) {
+//                completedDeviceIds.add(entry.getKey());
+//            }
+//        }
+        TaskInProgress completed = activeTasks.remove(completedDeviceId);
+        Task completedTask = completed.getTask();
+        if(super.getState() > 0) {
+            super.setState(super.getState() - 1);
+        }
+
+        if(!nextPossible.isEmpty()) {
             setNextElement(selectNextELement());
         }
-        if(getNextElement() instanceof Process nextElement){
-            if(nextElement.getName().equals("D1")){
-                currentTask.setRecycle(true);
+
+        if (getNextElement() instanceof Process nextElement) {
+            if (nextElement.getName().equals("D1")) {
+                completedTask.setRecycle(true);
             }
-            if(nextElement.getMaxQueue() >= nextElement.getQueue().size()){
-                nextElement.getQueue().add(currentTask);
-                getNextElement().inAct();
-            }
-            else {
+            if (nextElement.getMaxQueue() >= nextElement.getQueue().size()) {
+                nextElement.getQueue().add(completedTask);
+                nextElement.inAct();
+            } else {
                 nextElement.increaseFailure();
             }
         }
+//        for (Integer deviceId : completedDeviceIds) {
+//            TaskInProgress completed = activeTasks.remove(deviceId);
+//            Task completedTask = completed.getTask();
+//
+//            if (super.getState() > 0) {
+//                super.setState(super.getState() - 1);
+//            }
+//
+//            if (!nextPossible.isEmpty()) {
+//                setNextElement(selectNextELement());
+//            }
+//
+//            if (getNextElement() instanceof Process nextElement) {
+//                if (nextElement.getName().equals("D1")) {
+//                    completedTask.setRecycle(true);
+//                }
+//                if (nextElement.getMaxQueue() >= nextElement.getQueue().size()) {
+//                    nextElement.getQueue().add(completedTask);
+//                    nextElement.inAct();
+//                } else {
+//                    nextElement.increaseFailure();
+//                }
+//            }
+//        }
+
         this.inAct();
-//        │╎   67 +                                                                                                                                                                                                                                         ╎│
-//│╎   68 +          // After finishing current task, check if there's another task in queue to process                                                                                                                                             ╎│
-//│╎   69 +          this.inAct();
     }
 
-    @Override
-    public double getDelay(){
-        return currentTask.getTaskSize() / process_speed;
+    private double calculateDelay(Task task) {
+        return task.getTaskSize() / process_speed;
     }
 
     @Override
@@ -84,9 +166,8 @@ public class Process extends Element {
     @Override
     public void doStatistics(double delta) {
         meanQueue = getMeanQueue() + queue.size() * delta;
-        if (super.getState() == 1) {
-            busyTime += delta;
-        }
+        int devicesInUse = Math.min(super.getState(), devices);
+        busyTime += devicesInUse * delta;
     }
 
     private Element selectNextELement(){

@@ -218,10 +218,6 @@ public class SimModelTest {
             this.d1QueueLeft = d1.getQueue().size();
             this.d2QueueLeft = d2.getQueue().size();
             this.d3QueueLeft = d3.getQueue().size();
-//
-//            this.d1Util = (d1.getBusyTime() / simulationTime) * 100;
-//            this.d2Util = (d2.getBusyTime() / simulationTime) * 100;
-//            this.d3Util = (d3.getBusyTime() / simulationTime) * 100;
 
             this.d1Util = Math.min((d1.getBusyTime() / simulationTime) * 100, 100.0);
             this.d2Util = Math.min((d2.getBusyTime() / simulationTime) * 100, 100.0);

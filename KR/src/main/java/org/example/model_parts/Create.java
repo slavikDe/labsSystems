@@ -19,8 +19,8 @@ public class Create extends Element {
     public void outAct() {
         super.outAct();
         super.setTnext(super.getTcurr() + super.getDelay());
-        Task task  = createTask(taskSizeMean, taskSizeDev);
 
+        Task task  = createTask(taskSizeMean, taskSizeDev);
         if(getNextElement() instanceof Process nextElement){
             if(nextElement.getMaxQueue() > nextElement.getQueue().size()){
                 nextElement.getQueue().offer(task);

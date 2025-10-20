@@ -14,9 +14,6 @@ public class Task {
     public Task() {}
     public Task(double taskSize) { this.taskSize = taskSize;
         counter++;
-//        System.out.format(
-//                "Task #%d created, size - %f\n", counter, taskSize
-//        );
     }
 
 }
