@@ -80,7 +80,7 @@ public class Model {
                         + "\nfailure probability = " +
                         p.getFailure() / (double) p.getQuantity());
 
-                System.out.println("Util%: " + p.getBusyTime() / globalTime * 100);
+                System.out.println("AvgUtil%: " + p.getBusyTime() / globalTime * 100 / p.getDevices());
                 System.out.println("In queue left: " + p.getQueue().size() + '\n');
             }
         }

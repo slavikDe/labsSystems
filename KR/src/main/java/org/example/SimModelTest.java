@@ -7,10 +7,14 @@ import org.example.simsimple.Distribution;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for validation model with
+ * different input params and pretty print
+ */
 
 public class SimModelTest {
     // Base parameters (default configuration)
-    private static final double BASE_SIMULATION_TIME = 100_000; // Increased from 1,000 to 100,000
+    private static final double BASE_SIMULATION_TIME = 100_000;
     private static final double BASE_CREATE_DELAY_MEAN = 300;
     private static final double BASE_CREATE_DELAY_DEV = 100;
     private static final double BASE_TASK_SIZE_MEAN = 500;
@@ -30,43 +34,31 @@ public class SimModelTest {
         System.out.println("█".repeat(150));
         testCreateDelayMean();
 
-//        // Test 2: Vary CREATE_DELAY_DEV
-//        System.out.println("\n\n" + "█".repeat(150));
-//        System.out.println("TEST SERIES 2: VARYING CREATE_DELAY_DEV (Task arrival variability)");
-//        System.out.println("█".repeat(150));
-//        testCreateDelayDev();
-
-        // Test 3: Vary TASK_SIZE_MEAN
+        // Test 2: Vary TASK_SIZE_MEAN
         System.out.println("\n\n" + "█".repeat(150));
         System.out.println("TEST SERIES 3: VARYING TASK_SIZE_MEAN (Average task complexity)");
         System.out.println("█".repeat(150));
         testTaskSizeMean();
 
-//        // Test 4: Vary TASK_SIZE_DEV
-//        System.out.println("\n\n" + "█".repeat(150));
-//        System.out.println("TEST SERIES 4: VARYING TASK_SIZE_DEV (Task complexity variability)");
-//        System.out.println("█".repeat(150));
-//        testTaskSizeDev();
-
-        // Test 5: Vary PROBABILITY_OF_INCORRECT
+        // Test 3: Vary PROBABILITY_OF_INCORRECT
         System.out.println("\n\n" + "█".repeat(150));
         System.out.println("TEST SERIES 5: VARYING PROBABILITY_OF_INCORRECT_TASK_PROCESSING (Error rate)");
         System.out.println("█".repeat(150));
         testProbabilityOfIncorrect();
 
-        // Test 6: Vary PROCESS_SPEED
+        // Test 4: Vary PROCESS_SPEED
         System.out.println("\n\n" + "█".repeat(150));
         System.out.println("TEST SERIES 6: VARYING PROCESS_SPEED (Processing capacity)");
         System.out.println("█".repeat(150));
         testProcessSpeed();
 
-        // Test 7: Vary MAX_QUEUE
+        // Test 5: Vary MAX_QUEUE
         System.out.println("\n\n" + "█".repeat(150));
         System.out.println("TEST SERIES 7: VARYING MAX_QUEUE (Queue capacity)");
         System.out.println("█".repeat(150));
         testMaxQueue();
 
-        // Test 8: Vary SIMULATION_TIME
+        // Test 6: Vary SIMULATION_TIME
         System.out.println("\n\n" + "█".repeat(150));
         System.out.println("TEST SERIES 8: VARYING SIMULATION_TIME (Simulation duration)");
         System.out.println("█".repeat(150));
@@ -75,6 +67,7 @@ public class SimModelTest {
         System.out.println("\n\n" + "╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
         System.out.println("║                                                    END OF TESTING REPORT                                                                      ║");
         System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝\n");
+        testMaxQueuePerEachStage();
     }
 
     private static void testCreateDelayMean() {
@@ -86,7 +79,7 @@ public class SimModelTest {
         List<SimulationResult> results = new ArrayList<>();
         for (double value : testValues) {
             SimulationResult result = runSimulationAndCollect(value, value, BASE_CREATE_DELAY_DEV, BASE_TASK_SIZE_MEAN, BASE_TASK_SIZE_DEV,
-                    BASE_PROBABILITY_OF_INCORRECT, BASE_PROCESS_SPEED, BASE_MAX_QUEUE, BASE_SIMULATION_TIME);
+                    BASE_PROBABILITY_OF_INCORRECT, BASE_PROCESS_SPEED, BASE_MAX_QUEUE, BASE_MAX_QUEUE, BASE_MAX_QUEUE, BASE_SIMULATION_TIME);
             results.add(result);
         }
 
@@ -103,7 +96,7 @@ public class SimModelTest {
         List<SimulationResult> results = new ArrayList<>();
         for (double value : testValues) {
             SimulationResult result = runSimulationAndCollect(value, BASE_CREATE_DELAY_MEAN, BASE_CREATE_DELAY_DEV, value, BASE_TASK_SIZE_DEV,
-                    BASE_PROBABILITY_OF_INCORRECT, BASE_PROCESS_SPEED, BASE_MAX_QUEUE, BASE_SIMULATION_TIME);
+                    BASE_PROBABILITY_OF_INCORRECT, BASE_PROCESS_SPEED, BASE_MAX_QUEUE, BASE_MAX_QUEUE, BASE_MAX_QUEUE, BASE_SIMULATION_TIME);
             results.add(result);
         }
         printConsolidatedTable("TASK_SIZE_MEAN", testValues, results);
@@ -118,7 +111,7 @@ public class SimModelTest {
         List<SimulationResult> results = new ArrayList<>();
         for (double value : testValues) {
             SimulationResult result = runSimulationAndCollect(value, BASE_CREATE_DELAY_MEAN, BASE_CREATE_DELAY_DEV, BASE_TASK_SIZE_MEAN, BASE_TASK_SIZE_DEV,
-                    value, 10.0, BASE_MAX_QUEUE, BASE_SIMULATION_TIME);
+                    value, 10.0, BASE_MAX_QUEUE, BASE_MAX_QUEUE, BASE_MAX_QUEUE,  BASE_SIMULATION_TIME);
             results.add(result);
         }
         printConsolidatedTable("PROB_INCORRECT", testValues, results);
@@ -132,24 +125,28 @@ public class SimModelTest {
         List<SimulationResult> results = new ArrayList<>();
         for (double value : testValues) {
             SimulationResult result = runSimulationAndCollect(value, BASE_CREATE_DELAY_MEAN, BASE_CREATE_DELAY_DEV, BASE_TASK_SIZE_MEAN, BASE_TASK_SIZE_DEV,
-                    BASE_PROBABILITY_OF_INCORRECT, value, BASE_MAX_QUEUE, BASE_SIMULATION_TIME);
+                    BASE_PROBABILITY_OF_INCORRECT, value, BASE_MAX_QUEUE, BASE_MAX_QUEUE, BASE_MAX_QUEUE, BASE_SIMULATION_TIME);
             results.add(result);
         }
         printConsolidatedTable("PROCESS_SPEED", testValues, results);
     }
 
     private static void testMaxQueue() {
-        int[] testValues = {20, 50, 100, 150, 200};
+        int[] testValues = { 2, 3, 4};
         System.out.println("Testing MAX_QUEUE with values: " + arrayToString(testValues));
         System.out.println("All other parameters held constant at base values\n");
 
         List<SimulationResult> results = new ArrayList<>();
-        for (int value : testValues) {
-            SimulationResult result = runSimulationAndCollect(value, BASE_CREATE_DELAY_MEAN, BASE_CREATE_DELAY_DEV, BASE_TASK_SIZE_MEAN, BASE_TASK_SIZE_DEV,
-                    BASE_PROBABILITY_OF_INCORRECT, BASE_PROCESS_SPEED, value, BASE_SIMULATION_TIME);
-            results.add(result);
+        for (int d1Value : testValues) {
+            for (int d2Value : testValues) {
+                for (int d3Value : testValues) {
+                                        SimulationResult result = runSimulationAndCollect(d1Value, BASE_CREATE_DELAY_MEAN, BASE_CREATE_DELAY_DEV, BASE_TASK_SIZE_MEAN, BASE_TASK_SIZE_DEV,
+                            BASE_PROBABILITY_OF_INCORRECT, BASE_PROCESS_SPEED, d1Value, d2Value, d3Value, BASE_SIMULATION_TIME);
+                    results.add(result);
+                }
+                printConsolidatedTableInt("MAX_QUEUE", testValues, results);
+            }
         }
-        printConsolidatedTableInt("MAX_QUEUE", testValues, results);
     }
 
     private static void testSimulationTime() {
@@ -160,7 +157,7 @@ public class SimModelTest {
         List<SimulationResult> results = new ArrayList<>();
         for (double value : testValues) {
             SimulationResult result = runSimulationAndCollect(value, BASE_CREATE_DELAY_MEAN, BASE_CREATE_DELAY_DEV, BASE_TASK_SIZE_MEAN, BASE_TASK_SIZE_DEV,
-                    BASE_PROBABILITY_OF_INCORRECT, BASE_PROCESS_SPEED, BASE_MAX_QUEUE, value);
+                    BASE_PROBABILITY_OF_INCORRECT, BASE_PROCESS_SPEED, BASE_MAX_QUEUE, BASE_MAX_QUEUE, BASE_MAX_QUEUE, value);
             results.add(result);
         }
         printConsolidatedTable("SIMULATION_TIME", testValues, results);
@@ -219,9 +216,9 @@ public class SimModelTest {
             this.d2QueueLeft = d2.getQueue().size();
             this.d3QueueLeft = d3.getQueue().size();
 
-            this.d1Util = Math.min((d1.getBusyTime() / simulationTime) * 100, 100.0);
-            this.d2Util = Math.min((d2.getBusyTime() / simulationTime) * 100, 100.0);
-            this.d3Util = Math.min((d3.getBusyTime() / simulationTime) * 100, 100.0);
+            this.d1Util = (d1.getBusyTime() / simulationTime) * 100 / d1.getDevices();
+            this.d2Util = (d2.getBusyTime() / simulationTime) * 100 / d2.getDevices();
+            this.d3Util = (d3.getBusyTime() / simulationTime) * 100 / d3.getDevices();
 
         }
     }
@@ -230,7 +227,7 @@ public class SimModelTest {
                                                             double createDelayMean, double createDelayDev,
                                                             double taskSizeMean, double taskSizeDev,
                                                             double probIncorrect, double processSpeed,
-                                                            int maxQueue, double simulationTime) {
+                                                            int d1MaxQueue, int d2MaxQueue, int d3MaxQueue,  double simulationTime) {
         Element.resetIdCounter();
 
         Create c = new Create(createDelayMean, createDelayDev);
@@ -258,9 +255,13 @@ public class SimModelTest {
         d3.setNextPossible(List.of(d1, d));
         d3.setNextPossibleProbability(List.of(probIncorrect, 1 - probIncorrect));
 
-        d1.setMaxQueue(maxQueue);
-        d2.setMaxQueue(maxQueue);
-        d3.setMaxQueue(maxQueue);
+        d1.setMaxQueue(d1MaxQueue);
+        d2.setMaxQueue(d2MaxQueue);
+        d3.setMaxQueue(d3MaxQueue);
+
+        d1.setDevices(4);
+        d2.setDevices(4);
+        d3.setDevices(4);
 
         ArrayList<Element> list = new ArrayList<>(List.of(c, d1, d2, d3));
         Model model = new Model(list, false);
@@ -278,7 +279,7 @@ public class SimModelTest {
         System.out.println("│ " + String.format("%-12s | %-10s | %-35s | %-35s | %-35s",
             paramName, "Created", "D1 (Input)", "D2 (Process)", "D3 (Output)"));
         System.out.println("│ " + String.format("%-12s | %-10s | %-35s | %-35s | %-35s",
-            "", "Tasks", "Proc|MeanQ|Fail%|QLft|Util%", "Proc|MeanQ|Fail%|QLft|Util%", "Proc|MeanQ|Fail%|QLft|Util%"));
+            "", "Tasks", "Proc|MeanQ|Fail%|QLft|AUtil%", "Proc|MeanQ|Fail%|QLft|AUtil%", "Proc|MeanQ|Fail%|QLft|AUtil%"));
         System.out.println("├" + "─".repeat(150) + "┤");
 
         // Data rows
@@ -306,7 +307,7 @@ public class SimModelTest {
         System.out.println("│ " + String.format("%-12s | %-10s | %-35s | %-35s | %-35s",
             paramName, "Created", "D1 (Input)", "D2 (Process)", "D3 (Output)"));
         System.out.println("│ " + String.format("%-12s | %-10s | %-35s | %-35s | %-35s",
-            "", "Tasks", "Proc|MeanQ|Fail%|QLft|Util%", "Proc|MeanQ|Fail%|QLft|Util%", "Proc|MeanQ|Fail%|QLft|Util%"));
+            "", "Tasks", "Proc|MeanQ|Fail%|QLft|AUtil%", "Proc|MeanQ|Fail%|QLft|AUtil%", "Proc|MeanQ|Fail%|QLft|AUtil%"));
         System.out.println("├" + "─".repeat(150) + "┤");
 
         // Data rows

@@ -9,7 +9,7 @@ import java.util.List;
 
 
 public class SimModel {
-    private static final double SIMULATION_TIME = 25_000;
+    private static final double SIMULATION_TIME = 1_000_000;
     private static final double CREATE_DELAY_MEAN = 300; // 300
     private static final double CREATE_DELAY_DEV = 100; // 100
 
@@ -19,14 +19,14 @@ public class SimModel {
     private static final double PROBABILITY_OF_INCORRECT_TASK_PROCESSING = 0.05;
     private static final double PROCESS_SPEED = 0.5;
 
-    // Number of devices for each process (1 for sequential, >1 for parallel)
-
-    private static final int DEVICES = 3;
+    private static final int DEVICES = 4;
     private static final int D1_DEVICES = DEVICES;
     private static final int D2_DEVICES = DEVICES;
     private static final int D3_DEVICES = DEVICES;
 
     public static void main(String[] args) {
+
+
         Create c = new Create(CREATE_DELAY_MEAN, CREATE_DELAY_DEV);
         c.setDistribution(Distribution.UNIFORM);
         c.setTaskSizeMean(TASK_SIZE_MEAN);
@@ -59,12 +59,13 @@ public class SimModel {
         d3.setNextPossibleProbability(List.of(PROBABILITY_OF_INCORRECT_TASK_PROCESSING, 1 - PROBABILITY_OF_INCORRECT_TASK_PROCESSING));
 
         // queue size
-        d1.setMaxQueue(100);
-        d2.setMaxQueue(100);
-        d3.setMaxQueue(100);
+        d1.setMaxQueue(4);
+        d2.setMaxQueue(3);
+        d3.setMaxQueue(3);
 
         ArrayList<Element> list = new ArrayList<>(List.of(c, d1, d2, d3));
         Model model = new Model(list);
         model.simulate(SIMULATION_TIME);
+
     }
 }

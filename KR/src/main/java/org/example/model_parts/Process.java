@@ -29,9 +29,7 @@ public class Process extends Element {
     List<Element> nextPossible = new ArrayList<>();
     List<Double> nextPossibleProbability = new ArrayList<>();
 
-    public Process(){
-        devices =4;
-    }
+    public Process(){ }
 
     public Process(double delay) {
         super(delay);
