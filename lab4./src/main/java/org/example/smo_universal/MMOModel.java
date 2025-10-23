@@ -14,7 +14,7 @@ public class MMOModel {
         tcurr = tnext;
     }
 
-    public void simulate(double time, boolean verbose) {
+    public void simulate(double time, boolean verbose, int endEventId) {
         while (tcurr < time) {
             tnext = Double.MAX_VALUE;
             for (Element e : list) {
@@ -23,6 +23,7 @@ public class MMOModel {
                     event = e.getId();
                 }
             }
+
             if (verbose) {
                 System.out.println("\nIt's time for event in " +
                         list.get(event).getName() +
@@ -41,6 +42,9 @@ public class MMOModel {
                 if (e.getTnext() == tcurr) {
                     e.outAct();
                 }
+            }
+            if (event == endEventId) {
+                break;
             }
             if (verbose) {
                 printInfo();

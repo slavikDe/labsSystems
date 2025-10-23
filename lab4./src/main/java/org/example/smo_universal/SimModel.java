@@ -19,6 +19,6 @@ public class SimModel {
         list.add(c);
         list.add(p);
         MMOModel model = new MMOModel(list);
-        model.simulate(1000.0, true);
+//        model.simulate(1000.0, true);
     }
 }

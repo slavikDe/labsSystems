@@ -5,43 +5,17 @@ import org.example.smo_universal.Process;
 
 import java.util.ArrayList;
 
-public class LinerModel implements Model {
-    private final int numberSystems;
-    private MMOModel mmoModel;
+public class LinerModel extends Model {
 
-    private boolean verbose = true;
-
-    public LinerModel(int nSystems){
-        this.numberSystems = nSystems;
-    }
-    public LinerModel(int nSystems, boolean verbose){
-        this.numberSystems = nSystems;
-        this.verbose = verbose;
+    public LinerModel(int nSystems, int nDevice, boolean verbose) {
+        super(nSystems, nDevice, verbose);
     }
 
     @Override
-    public void initialize() {
-        Element.resetIdCounter();
-        Create create = new Create();
-        ArrayList<Element> stages = new ArrayList<>();
-        stages.add(create);
-
-        for(int i = 0; i < numberSystems; i++){
-            Process process = new Process();
-            stages.get(i).setNextElement(process);
-            stages.add(process);
+    public void addRoutes() {
+        ArrayList<Element> stg = super.stages;
+        for(int i = 0; i < stg.size() - 1; i++){
+            stg.get(i).setNextElement(stg.get(i+1));
         }
-
-        Dispose dispose = new Dispose();
-        stages.get(numberSystems).setNextElement(dispose);
-
-        mmoModel = new MMOModel(stages);
     }
-
-    @Override
-    public void go(double simulationTime) {
-        mmoModel.simulate(simulationTime, verbose);
-    }
-
-
 }
