@@ -1,4 +1,4 @@
-package org.example;
+package org.example.parts;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,15 +6,16 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Task {
-    private static int counter = 0;
 
     private double taskSize;
-    private boolean isRecycle = false;
+    private boolean processed = false;
     private double finishTime = Double.MAX_VALUE;
+    private double processingTime = Double.MAX_VALUE;
 
     public Task() {}
     public Task(double taskSize) { this.taskSize = taskSize;
-        counter++;
     }
+
+
 
 }

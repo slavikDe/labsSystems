@@ -1,4 +1,4 @@
-package org.example.simsimple;
+package org.example.util;
 
 public enum Distribution {
     EXPONENTIAL,

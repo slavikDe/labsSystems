@@ -1,9 +1,9 @@
-package org.example.model_parts;
+package org.example.parts;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.example.simsimple.Distribution;
-import org.example.simsimple.FunRand;
+import org.example.util.Distribution;
+import org.example.util.FunRand;
 
 @Getter
 @Setter
@@ -81,7 +81,7 @@ public class Element {
     }
 
     public void printInfo() {
-        System.out.println(getName() + " state= " + state +
+        System.out.println(getName() +
                 " quantity = " + quantity +
                 " tnext= " + tnext);
     }
