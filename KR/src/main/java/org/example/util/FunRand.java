@@ -1,4 +1,4 @@
-package org.example.simsimple;
+package org.example.util;
 
 import java.util.Random;
 
@@ -52,4 +52,29 @@ public class FunRand {
         a = timeMean + timeDeviation * r.nextGaussian();
         return a;
     }
+
+    /**
+     * Generates a random value according to a Poisson
+     * distribution
+     *
+     * @param lambda mean value (parameter of Poisson distribution)
+     * @return a random value according to a Poisson distribution
+     */
+    public static double Poisson(double lambda){
+        double L = Math.exp(-lambda);
+        double p = 1.0;
+        int k = 0;
+
+        do {
+            k++;
+            double u = 0;
+            while (u == 0) {
+                u = Math.random();
+            }
+            p *= u;
+        } while (p > L);
+
+        return k - 1;
+    }
+
 }
