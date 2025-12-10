@@ -2,6 +2,8 @@ package org.example.parts;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.example.parts.multi_processing.Server;
+import org.example.parts.multi_processing.ServerManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,13 +43,12 @@ public class Stage extends Element {
     @Override
     public void outAct(){
         super.outAct();
-
         List<Task> completedTask = serverManager.getCompletedTasks(getTcurr()); // free servers with process current task
 
         for(Task task : completedTask){
             Element nextElement;
 
-                if(!nextPossible.isEmpty()) {
+            if(!nextPossible.isEmpty()) {
                 nextElement = selectNextStage();
             } else {
                 nextElement = super.getNextElement();
@@ -65,7 +66,6 @@ public class Stage extends Element {
                     nextStage.getQueue().increaseFailure();
                 }
             }
-
         }
         this.inAct();
 

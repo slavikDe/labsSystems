@@ -1,7 +1,6 @@
-package org.example;
+package org.example.util;
 
 import org.example.parts.*;
-import org.example.util.Distribution;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -68,16 +68,16 @@ public class Main {
         int q1Size = 1, q2Size = 1, q3Size = 1;
 
         while (q1Size != 10 &&  q2Size != 10 && q3Size != 10) {
-            doModel(q1Size, q2Size, q3Size, false);
+            createModelWithDiffQueues(q1Size, q2Size, q3Size, false);
             q1Size++;
-            doModel(q1Size, q2Size, q3Size, false);
+            createModelWithDiffQueues(q1Size, q2Size, q3Size, false);
             q2Size++;
-            doModel(q1Size, q2Size, q3Size, false);
+            createModelWithDiffQueues(q1Size, q2Size, q3Size, false);
             q3Size++;
         }
     }
 
-    private static void doModel(int q1Size, int q2Size, int q3Size, boolean verbose) {
+    private static void createModelWithDiffQueues(int q1Size, int q2Size, int q3Size, boolean verbose) {
         reset();
         ArrivalPoint arrivalPoint = new ArrivalPoint("Arrival");
         arrivalPoint.setDelayMean(ARRIVAL_DELAY_MEAN);
@@ -125,8 +125,8 @@ public class Main {
         Dispose.resetCounter();
     }
 
-    public static void main(String[] args){
-        doModel(4, 4, 4, true);
+    public static void main2(String[] args){
+        createModelWithDiffQueues(4, 4, 4, true);
 //        ArrivalPoint arrivalPoint = new ArrivalPoint("Arrival");
 //        arrivalPoint.setDelayMean(ARRIVAL_DELAY_MEAN);
 //        arrivalPoint.setDelayDev(ARRIVAL_DELAY_DEV);

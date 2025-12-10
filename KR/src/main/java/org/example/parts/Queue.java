@@ -27,6 +27,7 @@ public class Queue {
     public boolean add(Task task) {
         return tasks.add(task);
     }
+
     public void increaseFailure(){
         failure++;
     }

@@ -1,9 +1,8 @@
-package org.example.parts;
+package org.example.parts.multi_processing;
 
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.Optional;
+import org.example.parts.Task;
 
 @Getter
 @Setter

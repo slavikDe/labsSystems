@@ -15,8 +15,8 @@ public class ModelRunner {
 
     public void start() {
         for(int i = 0; i < runNumber; i++) {
-            model.initialize();
             long start = System.currentTimeMillis();
+            model.initialize();
             model.go(this.time);
             System.out.println("Cycle №" + (i+ 1) + ", time: " + (System.currentTimeMillis() - start) + "ms");
         }

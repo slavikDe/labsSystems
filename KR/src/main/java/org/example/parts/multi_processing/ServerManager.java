@@ -1,4 +1,6 @@
-package org.example.parts;
+package org.example.parts.multi_processing;
+
+import org.example.parts.Task;
 
 import java.util.ArrayList;
 import java.util.List;
